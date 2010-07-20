@@ -15,7 +15,7 @@ Refinery::Initializer.run do |config|
 
   config.action_controller.session = {
     :key    => '_refinery_session',
-    :secret => '18660f8788c8020f9e3d3bf6620a551b7d0b1da38863b0c3c2b061e9741e6fc486a579586ce71ff06d95e34177d66d0ce39d31c8ddaf53ae91955d70'
+    :secret => 'eec8fffc3637c05895f8e6a355179eaad0003ac5617e5368955baf7989e1faca4d8ab37140d690c20b05d5815609b7c680c644277b6a892be316a85c6596d75c'
   }
 
 end
