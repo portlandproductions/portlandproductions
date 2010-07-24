@@ -93,7 +93,7 @@ body {
 #footer_content {
     height: 103px;
     padding-top: 94px;
-    background: url('/images/refinery/logo.png') 0px 80px no-repeat;
+    /*background: url('/images/refinery/logo.png') 0px 80px no-repeat;*/
     text-align: right;
 }
 .inquiries .field input, .inquiries textarea {
