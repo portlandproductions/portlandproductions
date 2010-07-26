@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(:version => 20100708014636) do
 
   add_index "images", ["parent_id"], :name => "index_images_on_parent_id"
 
+  create_table "images_portfolio_entries", :id => false, :force => true do |t|
+    t.integer "image_id"
+    t.integer "portfolio_entry_id"
+    t.integer "position"
+  end
+
+  add_index "images_portfolio_entries", ["image_id", "portfolio_entry_id"], :name => "composite_key_index"
+
   create_table "inquiries", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -87,6 +95,18 @@ ActiveRecord::Schema.define(:version => 20100708014636) do
   add_index "pages", ["id"], :name => "index_pages_on_id"
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
 
+  create_table "portfolio_entries", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "position"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "portfolio_entries", ["id"], :name => "index_portfolio_entries_on_id"
+  add_index "portfolio_entries", ["parent_id"], :name => "index_portfolio_entries_on_parent_id"
+
   create_table "refinery_settings", :force => true do |t|
     t.string   "name"
     t.text     "value"
@@ -127,7 +147,7 @@ ActiveRecord::Schema.define(:version => 20100708014636) do
     t.datetime "created_at"
   end
 
-  add_index "slugs", ["name", "sluggable_type", "scope", "sequence"], :name => "index_slugs_on_name_and_sluggable_type_and_scope_and_sequence", :unique => true
+  add_index "slugs", ["name", "scope", "sequence", "sluggable_type"], :name => "index_slugs_on_name_and_sluggable_type_and_scope_and_sequence", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "user_plugins", :force => true do |t|
@@ -136,8 +156,8 @@ ActiveRecord::Schema.define(:version => 20100708014636) do
     t.integer "position"
   end
 
+  add_index "user_plugins", ["name", "user_id"], :name => "index_unique_user_plugins", :unique => true
   add_index "user_plugins", ["name"], :name => "index_user_plugins_on_name"
-  add_index "user_plugins", ["user_id", "name"], :name => "index_unique_user_plugins", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "login",             :null => false
